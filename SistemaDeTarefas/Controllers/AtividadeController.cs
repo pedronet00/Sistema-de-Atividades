@@ -52,7 +52,7 @@ namespace SistemaDeTarefas.Controllers
         {
             if (id != atividade.Id)
             {
-                return BadRequest("ID da atividade não corresponde.");
+                return BadRequest("ID da atividade não corresponde à uma atividade.");
             }
 
             await _atividadeRepositorio.UpdateAtividade(atividade);
