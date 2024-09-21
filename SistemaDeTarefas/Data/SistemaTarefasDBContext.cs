@@ -26,6 +26,16 @@ namespace SistemaDeTarefas.Data
             modelBuilder.ApplyConfiguration(new TipoAtividadeMap());
             modelBuilder.ApplyConfiguration(new LocalAtividadeMap());
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AtividadeModel>()
+            .HasOne(a => a.LocalAtividade)
+            .WithMany()  // Supondo que um Local possa estar em várias atividades
+            .HasForeignKey(a => a.localAtividade);
+
+            modelBuilder.Entity<AtividadeModel>()
+            .HasOne(a => a.TipoAtividade)
+            .WithMany()  // Supondo que um Local possa estar em várias atividades
+            .HasForeignKey(a => a.tipoAtividade);
         }
     }
 }

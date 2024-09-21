@@ -2,7 +2,7 @@
 {
     public class TipoAtividadeModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string tipoAtividade { get; set; }
     }

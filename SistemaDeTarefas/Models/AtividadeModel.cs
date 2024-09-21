@@ -9,10 +9,12 @@
 
         public string descricaoAtividade { get; set; }
 
-        public string localAtividade { get; set; }
+        public int localAtividade { get; set; }
+        public LocalAtividadeModel LocalAtividade { get; set; }
 
         public DateTime dataAtividade { get; set; }
 
         public int tipoAtividade { get; set; }
+        public TipoAtividadeModel TipoAtividade { get; set; }
     }
 }
