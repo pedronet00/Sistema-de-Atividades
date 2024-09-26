@@ -28,6 +28,24 @@ namespace SistemaDeTarefas.Repositorios
             return tipoAtividade;
         }
 
+        public async Task<TipoAtividadeModel> editarTipoAtividade(TipoAtividadeModel tipoAtividadeModel, int id)
+        {
+            TipoAtividadeModel tipoAtividade = await _dbContext.TipoAtividade.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tipoAtividade == null)
+            {
+                throw new Exception("Tipo de Atividade não encontrado.");
+            }
+
+            tipoAtividade.tipoAtividade = tipoAtividadeModel.tipoAtividade;
+
+            _dbContext.TipoAtividade.Update(tipoAtividade);
+            await _dbContext.SaveChangesAsync();
+
+            return tipoAtividade;
+        }
+
+
         public async Task<TipoAtividadeModel> desativarTipoAtividade(int id)
         {
             TipoAtividadeModel tipoAtividade = await _dbContext.TipoAtividade.FirstOrDefaultAsync(x => x.Id == id);

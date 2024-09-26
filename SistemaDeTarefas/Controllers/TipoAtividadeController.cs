@@ -91,6 +91,52 @@ namespace SistemaDeTarefas.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<TipoAtividadeModel>> Update(int id, [FromBody] TipoAtividadeModel tipoAtividadeModel)
+        {
+            var response = new Object();
+
+            try
+            {
+                // Verifica se o modelo está nulo
+                if (tipoAtividadeModel == null)
+                {
+                    throw new Exception("Nenhum dado foi enviado na requisição.");
+                }
+
+                // Validações adicionais, se necessário
+                if (string.IsNullOrWhiteSpace(tipoAtividadeModel.tipoAtividade))
+                {
+                    throw new Exception("O tipo de atividade é obrigatório.");
+                }
+
+                // Chama o repositório para atualizar o tipo de atividade
+                TipoAtividadeModel tipoAtividadeAtualizado = await _tipoAtividadeRepositorio.editarTipoAtividade(tipoAtividadeModel, id);
+
+                // Monta o response de sucesso
+                response = new
+                {
+                    message = "Tipo de atividade atualizado com sucesso!",
+                    tipoAtividade = tipoAtividadeAtualizado,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+                // Monta o response de erro
+                response = new
+                {
+                    message = "Erro ao atualizar o tipo de atividade!",
+                    error = ex.Message,
+                    status = 500
+                };
+            }
+
+            // Retorna o response
+            return Ok(response);
+        }
+
+
         [HttpPatch("desativar/{id}")]
         public async Task<ActionResult<TipoAtividadeModel>> desativarTipoAtividade(int id)
         {
