@@ -36,5 +36,14 @@ namespace SistemaDeTarefas.Repositorios
 
             return tipoAtividade;
         }
+
+        public async Task<TipoAtividadeModel> ativarTipoAtividade(int id)
+        {
+            TipoAtividadeModel tipoAtividade = await _dbContext.TipoAtividade.FirstOrDefaultAsync(x => x.Id == id);
+            tipoAtividade.statusTipoAtividade = 1;
+            await _dbContext.SaveChangesAsync();
+
+            return tipoAtividade;
+        }
     }
 }

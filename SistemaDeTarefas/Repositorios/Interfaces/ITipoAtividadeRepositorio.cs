@@ -9,6 +9,7 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
         Task<TipoAtividadeModel> cadastrarTipoAtividade(TipoAtividadeModel tipoAtividade);
 
         Task<TipoAtividadeModel> desativarTipoAtividade(int id);
+        Task<TipoAtividadeModel> ativarTipoAtividade(int id);
 
     }
 }

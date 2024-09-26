@@ -98,5 +98,13 @@ namespace SistemaDeTarefas.Controllers
 
             return Ok();
         }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<TipoAtividadeModel>> ativarTipoAtividade(int id)
+        {
+            await _tipoAtividadeRepositorio.ativarTipoAtividade(id);
+
+            return Ok();
+        }
     }
 }
