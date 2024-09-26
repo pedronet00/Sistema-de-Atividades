@@ -91,7 +91,7 @@ namespace SistemaDeTarefas.Controllers
 
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("desativar/{id}")]
         public async Task<ActionResult<TipoAtividadeModel>> desativarTipoAtividade(int id)
         {
             await _tipoAtividadeRepositorio.desativarTipoAtividade(id);
@@ -99,7 +99,7 @@ namespace SistemaDeTarefas.Controllers
             return Ok();
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("ativar/{id}")]
         public async Task<ActionResult<TipoAtividadeModel>> ativarTipoAtividade(int id)
         {
             await _tipoAtividadeRepositorio.ativarTipoAtividade(id);
