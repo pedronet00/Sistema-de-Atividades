@@ -8,5 +8,6 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
 
         Task<TipoAtividadeModel> cadastrarTipoAtividade(TipoAtividadeModel tipoAtividade);
 
+
     }
 }
