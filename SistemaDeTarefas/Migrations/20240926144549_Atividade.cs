@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -21,12 +20,7 @@ namespace SistemaDeTarefas.Migrations
                     localAtividade = table.Column<string>(type: "longtext", nullable: false),
                     dataAtividade = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     tipoAtividade = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Atividade", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
         }
 
         /// <inheritdoc />

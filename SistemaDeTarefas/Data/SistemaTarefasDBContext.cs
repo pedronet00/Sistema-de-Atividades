@@ -26,6 +26,7 @@ namespace SistemaDeTarefas.Data
             modelBuilder.ApplyConfiguration(new LivroMap());
             modelBuilder.ApplyConfiguration(new TipoAtividadeMap());
             modelBuilder.ApplyConfiguration(new LocalAtividadeMap());
+            modelBuilder.ApplyConfiguration(new AtividadeMap());
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AtividadeModel>()

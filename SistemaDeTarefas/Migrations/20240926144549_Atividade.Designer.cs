@@ -11,7 +11,7 @@ using SistemaDeTarefas.Data;
 namespace SistemaDeTarefas.Migrations
 {
     [DbContext(typeof(SistemaTarefasDBContext))]
-    [Migration("20240920222024_Atividade")]
+    [Migration("20240926144549_Atividade")]
     partial class Atividade
     {
         /// <inheritdoc />
@@ -34,9 +34,8 @@ namespace SistemaDeTarefas.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("localAtividade")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("localAtividade")
+                        .HasColumnType("int");
 
                     b.Property<int>("tipoAtividade")
                         .HasColumnType("int");
@@ -46,6 +45,10 @@ namespace SistemaDeTarefas.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("localAtividade");
+
+                    b.HasIndex("tipoAtividade");
 
                     b.ToTable("Atividade");
                 });
@@ -83,17 +86,50 @@ namespace SistemaDeTarefas.Migrations
 
             modelBuilder.Entity("SistemaDeTarefas.Models.LocalAtividadeModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("localAtividade")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
+                    b.Property<int>("statusLocalAtividade")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("LocalAtividade");
+                });
+
+            modelBuilder.Entity("SistemaDeTarefas.Models.PostModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("autorPost")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("dataPost")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("descricaoPost")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("textoPost")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("tituloPost")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("SistemaDeTarefas.Models.TarefaModel", b =>
@@ -122,8 +158,12 @@ namespace SistemaDeTarefas.Migrations
 
             modelBuilder.Entity("SistemaDeTarefas.Models.TipoAtividadeModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("statusTipoAtividade")
+                        .HasColumnType("int");
 
                     b.Property<string>("tipoAtividade")
                         .IsRequired()
@@ -154,6 +194,25 @@ namespace SistemaDeTarefas.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("SistemaDeTarefas.Models.AtividadeModel", b =>
+                {
+                    b.HasOne("SistemaDeTarefas.Models.LocalAtividadeModel", "LocalAtividade")
+                        .WithMany()
+                        .HasForeignKey("localAtividade")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaDeTarefas.Models.TipoAtividadeModel", "TipoAtividade")
+                        .WithMany()
+                        .HasForeignKey("tipoAtividade")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LocalAtividade");
+
+                    b.Navigation("TipoAtividade");
                 });
 #pragma warning restore 612, 618
         }
