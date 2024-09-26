@@ -30,7 +30,7 @@ namespace SistemaDeTarefas.Controllers
                 response = new
                 {
                     message = "Sucesso!",
-                    tiposAtividades = posts,
+                    posts = posts,
                     status = 200
                 };
 
@@ -46,6 +46,62 @@ namespace SistemaDeTarefas.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<PostModel>> Store([FromBody] PostModel postModel)
+        {
+
+            var response = new Object();
+
+            try
+            {
+
+                if (postModel == null)
+                {
+                    throw new Exception("Nenhum dado foi enviado na requisição.");
+                }
+
+                // validações adicionais
+                if (string.IsNullOrWhiteSpace(postModel.tituloPost))
+                {
+                    throw new Exception("O título do post é obrigatório.");
+                }
+
+                if (string.IsNullOrWhiteSpace(postModel.descricaoPost))
+                {
+                    throw new Exception("A descrição do post é obrigatória.");
+                }
+
+                if (string.IsNullOrWhiteSpace(postModel.textoPost))
+                {
+                    throw new Exception("O texto do post é obrigatório.");
+                }
+
+                PostModel post = await _postRepositorio.inserirPost(postModel);
+
+                response = new
+                {
+                    message = "Sucesso!",
+                    post = post,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+                response = new
+                {
+                    message = "Erro!",
+                    error = ex.Message,
+                    status = 500
+                };
+            }
+
+            return Ok(response);
+
+
+
+
         }
     }
 }
