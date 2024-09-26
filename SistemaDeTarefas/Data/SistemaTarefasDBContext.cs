@@ -17,6 +17,7 @@ namespace SistemaDeTarefas.Data
         public DbSet<TipoAtividadeModel> TipoAtividade { get; set; }
         public DbSet<LocalAtividadeModel> LocalAtividade { get; set; }
         public DbSet<AtividadeModel> Atividade { get; set; }
+        public DbSet<PostModel> Post { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

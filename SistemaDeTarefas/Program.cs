@@ -20,7 +20,8 @@ namespace SistemaDeTarefas
             builder.Services.AddScoped<ILivroRepositorio, LivroRepositorio>();
             builder.Services.AddScoped<ITipoAtividadeRepositorio, TipoAtividadeRepositorio>();
             builder.Services.AddScoped<ILocalAtividadeRepositorio, LocalAtividadeRepositorio>();
-            builder.Services.AddScoped<IAtividadeRepositorio, AtividadeRepositorio>();
+            builder.Services.AddScoped<IAtividadeRepositorio, AtividadeRepositorio>(); 
+            builder.Services.AddScoped<IPostRepositorio, PostRepositorio>();
 
             builder.Services.AddControllers();
 
