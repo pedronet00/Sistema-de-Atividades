@@ -89,9 +89,22 @@ namespace SistemaDeTarefas.Controllers
 
             return Ok(response);
 
+        }
 
+        [HttpPatch("desativar/{id}")]
+        public async Task<ActionResult<LocalAtividadeModel>> desativarLocalAtividade(int id)
+        {
+            await _localAtividadeRepositorio.desativarLocalAtividade(id);
 
+            return Ok();
+        }
 
+        [HttpPatch("ativar/{id}")]
+        public async Task<ActionResult<TipoAtividadeModel>> ativarLocalAtividade(int id)
+        {
+            await _localAtividadeRepositorio.ativarLocalAtividade(id);
+
+            return Ok();
         }
     }
 }

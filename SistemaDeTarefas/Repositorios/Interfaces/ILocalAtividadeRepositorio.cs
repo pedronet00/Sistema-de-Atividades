@@ -8,5 +8,8 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
         Task<List<LocalAtividadeModel>> buscarLocalAtividade();
 
         Task<LocalAtividadeModel> inserirLocalAtividade(LocalAtividadeModel localAtividade);
+
+        Task<LocalAtividadeModel> desativarLocalAtividade(int id);
+        Task<LocalAtividadeModel> ativarLocalAtividade(int id);
     }
 }

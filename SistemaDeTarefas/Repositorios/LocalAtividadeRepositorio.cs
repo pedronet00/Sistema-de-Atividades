@@ -27,5 +27,23 @@ namespace SistemaDeTarefas.Repositorios
             return localAtividade;
 
         }
+
+        public async Task<LocalAtividadeModel> desativarLocalAtividade(int id)
+        {
+            LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
+            localAtividade.statusLocalAtividade = 0;
+            await _dbContext.SaveChangesAsync();
+
+            return localAtividade;
+        }
+
+        public async Task<LocalAtividadeModel> ativarLocalAtividade(int id)
+        {
+            LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
+            localAtividade.statusLocalAtividade = 1;
+            await _dbContext.SaveChangesAsync();
+
+            return localAtividade;
+        }
     }
 }
