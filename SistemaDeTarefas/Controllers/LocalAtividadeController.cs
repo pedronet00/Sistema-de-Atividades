@@ -91,6 +91,51 @@ namespace SistemaDeTarefas.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<LocalAtividadeModel>> Update(int id, [FromBody] LocalAtividadeModel localAtividadeModel)
+        {
+            var response = new Object();
+
+            try
+            {
+                // Verifica se o modelo está nulo
+                if (localAtividadeModel == null)
+                {
+                    throw new Exception("Nenhum dado foi enviado na requisição.");
+                }
+
+                // Validações adicionais, se necessário
+                if (string.IsNullOrWhiteSpace(localAtividadeModel.localAtividade))
+                {
+                    throw new Exception("O local é obrigatório.");
+                }
+                 
+                // Chama o repositório para atualizar o tipo de atividade
+                LocalAtividadeModel localAtividadeAtualizado = await _localAtividadeRepositorio.editarLocalAtividade(localAtividadeModel, id);
+
+                // Monta o response de sucesso
+                response = new 
+                {
+                    message = "Local atualizado com sucesso!",
+                    tipoAtividade = localAtividadeAtualizado,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+                // Monta o response de erro
+                response = new
+                {
+                    message = "Erro ao atualizar o local!",
+                    error = ex.Message,
+                    status = 500
+                };
+            }
+
+            // Retorna o response
+            return Ok(response);
+        }
+
         [HttpPatch("desativar/{id}")]
         public async Task<ActionResult<LocalAtividadeModel>> desativarLocalAtividade(int id)
         {

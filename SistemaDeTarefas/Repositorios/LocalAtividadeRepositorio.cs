@@ -28,6 +28,23 @@ namespace SistemaDeTarefas.Repositorios
 
         }
 
+        public async Task<LocalAtividadeModel> editarLocalAtividade(LocalAtividadeModel localAtividadeModel, int id)
+        {
+            LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (localAtividade == null)
+            {
+                throw new Exception("Local não encontrado.");
+            }
+
+            localAtividade.localAtividade = localAtividadeModel.localAtividade;
+
+            _dbContext.LocalAtividade.Update(localAtividade);
+            await _dbContext.SaveChangesAsync();
+
+            return localAtividade;
+        }
+
         public async Task<LocalAtividadeModel> desativarLocalAtividade(int id)
         {
             LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
@@ -44,6 +61,11 @@ namespace SistemaDeTarefas.Repositorios
             await _dbContext.SaveChangesAsync();
 
             return localAtividade;
+        }
+
+        Task<TipoAtividadeModel> ILocalAtividadeRepositorio.editarLocalAtividade(LocalAtividadeModel localAtividade, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
