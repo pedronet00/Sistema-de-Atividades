@@ -17,14 +17,14 @@ namespace SistemaDeTarefas.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UsuarioModel usuarioModel)
+        public async Task<IActionResult> Login([FromBody] AuthModel authModel)
         {
-            if (usuarioModel == null || string.IsNullOrEmpty(usuarioModel.email) || string.IsNullOrEmpty(usuarioModel.password))
+            if (authModel == null || string.IsNullOrEmpty(authModel.email) || string.IsNullOrEmpty(authModel.password))
             {
                 return BadRequest("Email e senha são obrigatórios.");
             }
 
-            var usuario = await _authRepositorio.login(usuarioModel.email, usuarioModel.password);
+            var usuario = await _authRepositorio.login(authModel.email, authModel.password);
 
             if (usuario == null)
             {
