@@ -65,5 +65,9 @@ namespace SistemaDeTarefas.Repositorios
             return localAtividade;
         }
 
+        async public Task<LocalAtividadeModel> buscarUmLocalAtividade(int id)
+        {
+            return await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

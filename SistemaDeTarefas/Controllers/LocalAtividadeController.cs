@@ -91,6 +91,27 @@ namespace SistemaDeTarefas.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task<LocalAtividadeModel> Show(int id)
+        {
+            try
+            {
+                var localAtividade = await _localAtividadeRepositorio.buscarUmLocalAtividade(id);
+
+                if (localAtividade == null)
+                {
+                    throw new Exception("Local não existe!");
+                }
+
+                return localAtividade; // Retorna o objeto localAtividade diretamente
+            }
+            catch (Exception ex)
+            {
+              
+                throw new Exception("Erro ao buscar o local de atividades: " + ex.Message);
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<LocalAtividadeModel>> Update(int id, [FromBody] LocalAtividadeModel localAtividadeModel)
         {
