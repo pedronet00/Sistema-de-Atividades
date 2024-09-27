@@ -22,6 +22,7 @@ namespace SistemaDeTarefas
             builder.Services.AddScoped<ILocalAtividadeRepositorio, LocalAtividadeRepositorio>();
             builder.Services.AddScoped<IAtividadeRepositorio, AtividadeRepositorio>(); 
             builder.Services.AddScoped<IPostRepositorio, PostRepositorio>();
+            builder.Services.AddScoped<IAuthRepositorio, AuthRepositorio>();
 
             builder.Services.AddControllers();
 
