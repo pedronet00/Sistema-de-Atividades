@@ -63,5 +63,10 @@ namespace SistemaDeTarefas.Repositorios
 
             return tipoAtividade;
         }
+
+        async public Task<TipoAtividadeModel> buscarUmTipoAtividade(int id)
+        {
+            return await _dbContext.TipoAtividade.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

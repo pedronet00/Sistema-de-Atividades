@@ -5,6 +5,7 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
     public interface ITipoAtividadeRepositorio
     {
         Task<List<TipoAtividadeModel>> buscarTipoAtividade();
+        Task<TipoAtividadeModel> buscarUmTipoAtividade(int id);
 
         Task<TipoAtividadeModel> cadastrarTipoAtividade(TipoAtividadeModel tipoAtividade);
 

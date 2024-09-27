@@ -48,6 +48,27 @@ namespace SistemaDeTarefas.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{id}")]
+        public async Task<TipoAtividadeModel> Show(int id)
+        {
+            try
+            {
+                var tipoAtividade = await _tipoAtividadeRepositorio.buscarUmTipoAtividade(id);
+
+                if (tipoAtividade == null)
+                {
+                    throw new Exception("Tipo de atividade não existe!");
+                }
+
+                return tipoAtividade; 
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Erro ao buscar o tipo de atividade: " + ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<TipoAtividadeModel>> Store([FromBody] TipoAtividadeModel tipoAtividadeModel)
         {
