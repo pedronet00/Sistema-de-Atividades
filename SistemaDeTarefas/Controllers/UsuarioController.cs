@@ -12,11 +12,15 @@ namespace SistemaDeTarefas.Controllers
     {
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+
+        // CONSTRUTOR
         public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
         {
             _usuarioRepositorio = usuarioRepositorio;
         }
 
+
+        // LISTANDO TODOS OS USUÁRIOS
         [HttpGet]
         public async Task <ActionResult<List<UsuarioModel>>> Index() 
         {
@@ -24,6 +28,8 @@ namespace SistemaDeTarefas.Controllers
             return Ok(usuarios);
         }
 
+
+        // LISTANDO UM USUÁRIO
         [HttpGet("{id}")]
         public async Task<ActionResult<List<UsuarioModel>>> Show(int id)
         {
@@ -31,6 +37,8 @@ namespace SistemaDeTarefas.Controllers
             return Ok(usuario);
         }
 
+
+        // INSERINDO UM USUÁRIO
         [HttpPost]
         public async Task<ActionResult<UsuarioModel>> Store([FromBody] UsuarioModel usuarioModel)
         {
@@ -46,6 +54,8 @@ namespace SistemaDeTarefas.Controllers
             return Ok(response);
         }
 
+
+        // ALTERANDO UM USUÁRIO
         [HttpPut]
         public async Task<ActionResult<UsuarioModel>> Update([FromBody] UsuarioModel usuarioModel, int id)
         {
@@ -55,6 +65,8 @@ namespace SistemaDeTarefas.Controllers
             return Ok(usuario);
         }
 
+
+        // EXCLUINDO UM USUÁRIO
         [HttpDelete("{id}")]
         public async Task<ActionResult<UsuarioModel>> Delete(int id)
         {
