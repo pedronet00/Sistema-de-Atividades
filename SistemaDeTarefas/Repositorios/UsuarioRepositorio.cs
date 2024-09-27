@@ -50,6 +50,7 @@ namespace SistemaDeTarefas.Repositorios
 
             usuarioPorId.name = usuario.name;
             usuarioPorId.email = usuario.email;
+            usuarioPorId.password = usuario.password;
 
             _dbContext.Usuarios.Update(usuarioPorId);
             await _dbContext.SaveChangesAsync();
