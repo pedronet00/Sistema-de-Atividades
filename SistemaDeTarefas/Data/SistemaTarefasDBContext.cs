@@ -32,12 +32,12 @@ namespace SistemaDeTarefas.Data
             modelBuilder.Entity<AtividadeModel>()
             .HasOne(a => a.LocalAtividade)
             .WithMany()  // Supondo que um Local possa estar em várias atividades
-            .HasForeignKey(a => a.localAtividade);
+            .HasForeignKey(a => a.idLocalAtividade);
 
             modelBuilder.Entity<AtividadeModel>()
             .HasOne(a => a.TipoAtividade)
             .WithMany()  // Supondo que um Local possa estar em várias atividades
-            .HasForeignKey(a => a.tipoAtividade);
+            .HasForeignKey(a => a.idTipoAtividade);
         }
     }
 }
