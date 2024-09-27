@@ -15,6 +15,7 @@ namespace SistemaDeTarefas.Repositorios
         {
             _dbContext = dbContext;
         }
+        
         public async Task<List<LocalAtividadeModel>> buscarLocalAtividade()
         {
             return await _dbContext.LocalAtividade.ToListAsync();
@@ -28,7 +29,6 @@ namespace SistemaDeTarefas.Repositorios
             return localAtividade;
 
         }
-
 
         public async Task<LocalAtividadeModel> desativarLocalAtividade(int id)
         {
