@@ -10,5 +10,9 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
         Task<PostModel> inserirPost(PostModel post);
 
         Task<PostModel> editarPost(PostModel post, int id);
+
+        Task<PostModel> desativarPost(int id);
+
+        Task<PostModel> ativarPost(int id);
     }
 }

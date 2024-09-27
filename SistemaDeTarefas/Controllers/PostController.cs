@@ -141,5 +141,21 @@ namespace SistemaDeTarefas.Controllers
             // Retorna o response
             return Ok(response);
         }
+
+        [HttpPatch("desativar/{id}")]
+        public async Task<ActionResult<PostModel>> desativarPost(int id)
+        {
+            await _postRepositorio.desativarPost(id);
+
+            return Ok();
+        }
+
+        [HttpPatch("ativar/{id}")]
+        public async Task<ActionResult<PostModel>> ativarPost(int id)
+        {
+            await _postRepositorio.ativarPost(id);
+
+            return Ok();
+        }
     }
 }

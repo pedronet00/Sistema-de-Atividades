@@ -15,6 +15,47 @@ namespace SistemaDeTarefas.Repositorios
             _dbContext = dbContext;
         }
 
+        async public Task<PostModel> ativarPost(int id)
+        {
+            PostModel post = await _dbContext.Post.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (post == null) 
+            {
+                throw new Exception("Post não encontrado");
+            }
+
+            if(post.statusPost == 1)
+            {
+                throw new Exception("Post já está ativo!");
+            }
+
+            post.statusPost = 1;
+            await _dbContext.SaveChangesAsync();
+
+            return post;
+
+        }
+
+        async public Task<PostModel> desativarPost(int id)
+        {
+            PostModel post = await _dbContext.Post.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (post == null)
+            {
+                throw new Exception("Post não encontrado");
+            }
+
+            if (post.statusPost == 0)
+            {
+                throw new Exception("Post já está inativo!");
+            }
+
+            post.statusPost = 0;
+            await _dbContext.SaveChangesAsync();
+
+            return post;
+        }
+
         async public Task<PostModel> editarPost(PostModel postModel, int id)
         {
             PostModel post = await _dbContext.Post.FirstOrDefaultAsync(x => x.Id == id);

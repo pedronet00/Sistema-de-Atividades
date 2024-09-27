@@ -14,5 +14,7 @@
         public DateTime dataPost { get; set; }
 
         public int autorPost {  get; set; }
+
+        public int statusPost { get; set; }
     }
 }
