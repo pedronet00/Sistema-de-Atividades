@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using SistemaDeTarefas.Data;
 using SistemaDeTarefas.Models;
 using SistemaDeTarefas.Repositorios.Interfaces;
@@ -28,22 +29,6 @@ namespace SistemaDeTarefas.Repositorios
 
         }
 
-        public async Task<LocalAtividadeModel> editarLocalAtividade(LocalAtividadeModel localAtividadeModel, int id)
-        {
-            LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (localAtividade == null)
-            {
-                throw new Exception("Local não encontrado.");
-            }
-
-            localAtividade.localAtividade = localAtividadeModel.localAtividade;
-
-            _dbContext.LocalAtividade.Update(localAtividade);
-            await _dbContext.SaveChangesAsync();
-
-            return localAtividade;
-        }
 
         public async Task<LocalAtividadeModel> desativarLocalAtividade(int id)
         {
@@ -63,9 +48,22 @@ namespace SistemaDeTarefas.Repositorios
             return localAtividade;
         }
 
-        Task<TipoAtividadeModel> ILocalAtividadeRepositorio.editarLocalAtividade(LocalAtividadeModel localAtividade, int id)
+        async Task<LocalAtividadeModel> ILocalAtividadeRepositorio.editarLocalAtividade(LocalAtividadeModel localAtividadeModel, int id)
         {
-            throw new NotImplementedException();
+            LocalAtividadeModel localAtividade = await _dbContext.LocalAtividade.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (localAtividade == null)
+            {
+                throw new Exception("Local não encontrado.");
+            }
+
+            localAtividade.localAtividade = localAtividadeModel.localAtividade;
+
+            _dbContext.LocalAtividade.Update(localAtividade);
+            await _dbContext.SaveChangesAsync();
+
+            return localAtividade;
         }
+
     }
 }

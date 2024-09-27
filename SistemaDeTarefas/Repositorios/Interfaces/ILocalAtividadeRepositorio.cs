@@ -9,7 +9,7 @@ namespace SistemaDeTarefas.Repositorios.Interfaces
 
         Task<LocalAtividadeModel> inserirLocalAtividade(LocalAtividadeModel localAtividade);
 
-        Task<TipoAtividadeModel> editarLocalAtividade(LocalAtividadeModel localAtividade, int id);
+        Task<LocalAtividadeModel> editarLocalAtividade(LocalAtividadeModel localAtividade, int id);
         Task<LocalAtividadeModel> desativarLocalAtividade(int id);
         Task<LocalAtividadeModel> ativarLocalAtividade(int id);
     }
