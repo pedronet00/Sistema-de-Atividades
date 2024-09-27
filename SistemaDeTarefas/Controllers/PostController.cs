@@ -99,9 +99,47 @@ namespace SistemaDeTarefas.Controllers
 
             return Ok(response);
 
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<PostModel>> Update(int id, [FromBody] PostModel postModel)
+        {
+            var response = new Object();
+
+            try
+            {
+                // Verifica se o modelo está nulo
+                if (postModel == null)
+                {
+                    throw new Exception("Nenhum dado foi enviado na requisição.");
+                }
 
 
 
+                // Chama o repositório para atualizar o tipo de atividade
+                PostModel postAtualizado = await _postRepositorio.editarPost(postModel, id);
+
+                // Monta o response de sucesso
+                response = new
+                {
+                    message = "Post atualizado com sucesso!",
+                    tipoAtividade = postAtualizado,
+                    status = 200
+                };
+            }
+            catch (Exception ex)
+            {
+                // Monta o response de erro
+                response = new
+                {
+                    message = "Erro ao atualizar o post!",
+                    error = ex.Message,
+                    status = 500
+                };
+            }
+
+            // Retorna o response
+            return Ok(response);
         }
     }
 }

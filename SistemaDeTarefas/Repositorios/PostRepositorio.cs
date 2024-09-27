@@ -15,6 +15,27 @@ namespace SistemaDeTarefas.Repositorios
             _dbContext = dbContext;
         }
 
+        async public Task<PostModel> editarPost(PostModel postModel, int id)
+        {
+            PostModel post = await _dbContext.Post.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (post == null)
+            {
+                throw new Exception("Post não encontrado.");
+            }
+
+            post.autorPost= postModel.autorPost;
+            post.dataPost = postModel.dataPost;
+            post.tituloPost = postModel.tituloPost;
+            post.descricaoPost = postModel.descricaoPost;
+            post.textoPost = postModel.textoPost;
+
+            _dbContext.Post.Update(post);
+            await _dbContext.SaveChangesAsync();
+
+            return post;
+        }
+
         public async Task<PostModel> inserirPost(PostModel post)
         {
             await _dbContext.Post.AddAsync(post);
