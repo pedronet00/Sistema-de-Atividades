@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaDeTarefas.Migrations;
 using SistemaDeTarefas.Models;
 using SistemaDeTarefas.Repositorios;
 using SistemaDeTarefas.Repositorios.Interfaces;
@@ -22,8 +23,32 @@ namespace SistemaDeTarefas.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AtividadeModel>>> GetAllAtividades()
         {
-            var atividades = await _atividadeRepositorio.GetAllAtividades();
-            return Ok(atividades);
+
+            var response = new Object();
+
+            try
+            {
+                var atividades = await _atividadeRepositorio.GetAllAtividades();
+
+                response = new
+                {
+                    message = "Sucesso!",
+                    tiposAtividades = atividades,
+                    status = 200
+                };
+            }
+            catch (Exception ex) 
+            {
+                response = new
+                {
+                    message = "Erro ao buscar atividades!",
+                    erro = ex.Message,
+                    status = 500
+                };
+            }
+
+
+            return Ok(response);
         }
 
         // GET: api/Atividade/{id}
