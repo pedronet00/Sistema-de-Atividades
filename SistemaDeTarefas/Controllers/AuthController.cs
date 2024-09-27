@@ -39,7 +39,6 @@ namespace SistemaDeTarefas.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            
             await _authRepositorio.logout();
             return Ok("Logout realizado com sucesso.");
         }
